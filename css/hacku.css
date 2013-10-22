@@ -1,0 +1,363 @@
+@charset "utf-8";
+/* hacku.css */
+ 
+ * { /* 全ての要素の間隔・余白を０へ */
+margin:0;
+padding:0;
+}
+
+
+body {
+	margin: 0;
+	color: #333;
+	text-align: center;
+	background-image:;
+	background-color: #FDFDFD;
+	background-position: top;
+	background-repeat: repeat-x;
+}
+
+
+/* 斁E��サイズ */
+
+p, 
+#contents li,
+dl,
+dd
+{
+	line-height: 160%;
+}
+
+
+p{
+	margin: 0px 0em 1.5em 20px;
+	font-size: small;
+}
+
+ul,ol,dl{
+	margin: 0em 1em 1em 2em;
+}
+
+a:active {
+color: #444444;
+}
+
+
+
+/* ========================================  #page ページ外枠 */
+#page {
+	width: 950px;
+	margin: 0px auto;
+	text-align: left;
+}
+
+
+
+/* ========================================  #header 画面上部 */
+#header {
+	height: 110px;
+	margin: 0px;
+	border-top: 1px solid #FFFFFF;
+	color: #FFFFFF;
+}
+
+#title {
+	margin: 10px 0px 0px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #666666;
+	float: left;
+}
+
+#login {
+	margin: 60px 0px 0px;
+    background-color: white;
+    float: right;
+}
+
+
+
+
+
+/* ======================================== #contents 画面中央部 #mainとサイドメニューの外枠 */
+#contents{
+	padding: 0px 0px 20px;
+	margin: 0px 0px 0px 0px;
+}
+
+
+/* ========================================  #main ペ�Eジの本斁E*/
+#main {
+	float: right;
+	margin:2px;
+	width: 640px;
+	border-style: dashed;
+	border-width: 2px;
+	border-color:#A0C523;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+}
+
+#main1_s{
+	padding: 2px 0px 0px 0px;
+	background-color: #8DC21F;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main2_s{
+	padding: 2px 0px 0px 0px;
+	background-color: #B0BE23;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main3_s{
+	padding: 2px 0px 0px 0px;
+	background-color: #D4B928;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main4_s{
+	padding: 2px 0px 0px 0px;
+	background-color: #F7B52C;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main1_k{
+	padding: 2px 0px 0px 0px;
+	background-color: #C30D23;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main2_k{
+	padding: 2px 0px 0px 0px;
+	background-color: #D44526;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main3_k{
+	padding: 2px 0px 0px 0px;
+	background-color: #E67D29;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+#main4_k{
+	padding: 2px 0px 0px 0px;
+	background-color: #F7B52C;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	margin:20px;
+}
+
+
+
+#main h1 {
+	padding: 10px;
+	margin: 20px;
+	background-color: #FFF;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+	color: #0B7A8E;
+}
+
+
+#main h2 {
+	clear: both;
+	padding: 3px 0px 3px 5px;
+	margin: 2em 0px 1em;
+	border-left: 10px solid #F4CC0B;
+	font-size: 120%;
+	background-color: #F6F6F6;
+}
+
+
+
+
+#main h3 {
+	margin: 0px 0px 0.5em 3px;
+	font-size: 100%;
+	color: #336699;
+}
+
+
+/* ========================================  menu 左サイドメニュー */
+#menu {
+	float: left;
+	width: 300px;
+	margin:auto;
+	background-color: #FFFFFF;
+}
+
+#menu p{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+
+#accountInfo{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	border-style: dashed;
+	border-width: 2px;
+	border-color:#A0C523;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+}
+
+#joinMenu{
+	padding: 5px 0px 0px 5px;
+	margin: 20px;
+	border-style: dashed;	
+	border-width: 2px;
+	border-color:#A0C523;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+}
+
+#joinMenu a{
+	text-decoration:none;
+	font-size: small;
+	font-style:italic;
+	color:  #357709;
+}
+
+#manageMenu{
+	padding: 5px 0px 0px 5px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	border-style: dashed;
+	border-width: 2px;
+	border-color:#A0C523;
+	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
+}
+
+#manageMenu a{
+	text-decoration: none;
+	font-size: small;
+	font-style:italic;
+	color: #800000;
+}
+
+
+
+/* ========================================  #footer 画面下部 */
+#footer {
+	margin: 40px 0px 20px 0px;
+	padding: 10px 0px;
+	color: #FFFFFF;
+	text-align: center;
+	background-color: #357709;
+	clear:both;
+}
+
+
+
+/* ========================================  #templatelink 画面下部:著作リンク */
+#templatelink {
+	padding: 3px 0px;
+	margin: 0px 0px 5px;
+	font-size: 14px;
+	text-align: right;
+}
+
+
+#templatelink a{
+	color: #336699;
+	text-decoration: none;
+}
+
+
+/* ========================================  そ�Eほか個別設宁E*/
+.title{
+	padding: 0px 0px 0px 10px;
+	margin: 0px 0px 20px;
+	border-left: 30px solid #F4CC0B;
+}
+
+.label{
+	padding: 7px 5px 5px 10px;
+	margin: 0px 0px 10px;
+	border-left: 10px solid #F4CC0B;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #0B7A8E;
+}
+
+
+.subh {
+	padding: 5px 0px 0px 3px;
+	margin: 0px;
+	border-top: 1px dashed #999999;
+	font-weight: bold;
+	color: #4A8854;
+}
+
+.photo {
+	margin: 0px 0px 20px;
+}
+
+.toInfo {
+	margin: 0px 0px 1em;
+	text-align: right;
+	list-style-type: none;
+}
+
+.box {
+	float: left;
+	height: 150px;
+	width: 200px;
+	margin: 0px 10px 15px 0px;
+	font-size: 92%;
+	background-color: #EBF0F3;
+}
+
+.box p{
+	margin: 10px !important;
+}
+
+
+/*#container {
+    width: 500px;
+    width: 70%;
+    margin: 0 auto;
+}
+ 
+#header {
+    height: 100px;
+}
+
+#title {
+    background-color: white;
+    float: left;
+}
+
+#login {
+    background-color: white;
+    float: right;
+}
+#main {
+    clear: left;
+    clear: right;
+    float: center;
+    background-color: purple;
+    overflow: hidden;
+}
+#footer {
+    clear: left;
+    background-color: green;
+}
+ 
+#menu {
+    clear: left;
+    clear: right;
+    background-color: pink;
+    float: left;
+    width: 300px;
+}
+
+.menuTitle {
+    font-weight: bold;
+}*/

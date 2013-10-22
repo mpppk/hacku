@@ -1,0 +1,41 @@
+/* mycss.css */
+ 
+#container {
+    /* width: 500px; */
+    width: 70%;
+    margin: 0 auto;
+}
+ 
+#header {
+    height: 150px;
+}
+#title {
+    background-color: red;
+    float: left;
+}
+#login {
+    background-color: green;
+    float: right;
+}
+#main {
+    clear: left;
+    clear: right;
+    background-color: gray;
+    overflow: hidden;
+}
+#footer {
+    clear: left;
+    background-color: green;
+}
+ 
+#menu {
+    clear: left;
+    clear: right;
+    background-color: pink;
+    float: left;
+    width: 300px;
+}
+
+.menuTitle {
+    font-weight: bold;
+}
