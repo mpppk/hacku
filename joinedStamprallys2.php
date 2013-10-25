@@ -8,7 +8,7 @@
 	// スタンプラリー詳細のURL
 	define("DETAIL_URL", "joinedStamprallyDetail.php");
 
-	$usr = new User(tempTwID);
+	$usr = new User($_SESSION['me']->id);
 	$allJoinedStamprallyID = $usr->getAllJoinedStamprallyID();
 	
 	// ----------HTMLで利用する変数----------

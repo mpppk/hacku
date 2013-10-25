@@ -1,6 +1,17 @@
+<?php 
+	require_once(dirname(__FILE__). "/php/config.php");
+	require_once(dirname(__FILE__). "/php/getLoginInfo.php");
+?>
+
+
 <div id="menu">
 	<div id="accountInfo">
-		<p>(twitterアカウント）さん</p>
+		<?php if(isset($_SESSION['me'])): ?>
+			<img src=<?php echo h($_SESSION['me']->profile_image_url); ?> width="40">
+			<p><?php echo h($_SESSION['me']->screen_name); ?>さん</p>
+		<?php else: ?>
+			<p>guestさん</p>
+		<?php endif; ?>
 	</div>
 	<div id="joinMenu">
 		<span class="menuTitle"><img src="imgs/sankasuru01.gif" ></span>

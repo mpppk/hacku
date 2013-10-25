@@ -1,26 +1,3 @@
-<?php
-    require_once(dirname(__FILE__) . "/php/sessionInit.php");
-    require_once(dirname(__FILE__). "/php/config.php");
-    require_once(dirname(__FILE__). "/php/getLoginInfo.php");
-    echo session_id(). "<br>";
-    if(!isset($_SESSION['me'])){
-        echo "in index session me timeout<br>";
-    }else{
-        echo "you have session me<br>";
-    }
-
-    $nextURL = "a";
-    // よく分からんけど、twitterログイン後、index.php以外に飛ぶとエラーになるのでここで処理する
-    if (isset($_SESSION['nextURL'])) {
-        $nextURL = $_SESSION['nextURL'];
-        echo "session nextURL exist: ". $nextURL. "<br>";
-        unset($_SESSION['beforeURL']);
-        unset($_SESSION['nextURL']);
-        // header('Location: '. $nextURL. "?". session_name(). "=". session_id());exit();
-    }else{
-        echo "session nextURLはないで<br>";
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,9 +8,37 @@
 </head>
 <body>
 <div id="page">
-<?php include (HEADER_NAME); ?> 
+<div id="header">
+	<div id="title">
+		<h1><a href="index.php"><img src="imgs/title01.gif"></a></h1>
+	</div>
+	<div id="login">
+		<h1><img src="imgs/login_min_01.gif"></h1>
+	</div>
+</div>
+
+
 <div id = "contents">
-    <?php include (MENU_NAME); ?>
+	<div id="menu">
+	<div id="accountInfo">
+		<p>(twitterアカウント）さん</p>
+	</div>
+	<div id="joinMenu">
+		<span class="menuTitle"><img src="imgs/sankasuru01.gif" ></span>
+		<ul>
+			<li><a href="joinedStamprallys.php">参加中のスタンプラリーを確認する</a></li>
+			<li><a href="gotTickets.php">取得済みのチケットを確認する</a></li>
+			<li><a href="neighborhoodStamprally.php">近くのスタンプラリーを調べる</a></li>
+		</ul>
+	</div>
+	<div id="manageMenu">
+		<span class="menuTitle"><img src="imgs/kanrisuru01.gif"></span>
+		<ul>
+			<li><a href="addStamprally.php">新しくスタンプラリーを登録</a></li>
+			<li><a href="managedStamprallys.php">既存のスタンプラリーを管理す</a></li>
+		</ul>
+	</div>
+	</div>
 	<div id="main">
 		<img src="imgs/easyrallytoha01.gif">
 		<p>スタンプラリー/オリエンテーリング支援サービスです</p>
@@ -71,7 +76,7 @@
             </div>
             
 	</div>
-    <?php include (FOOTER_NAME); ?>
+    <div id="footer">footerでGOZARU!!!!!!!!!</div>
 </div>
 </div>
 

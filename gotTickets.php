@@ -1,11 +1,12 @@
 <?php
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	require_once("php/config.php");
 	require_once(dirname(__FILE__) . "/php/functions.php");
-	define("tempTwID", 127982310);
+	// define("tempTwID", 127982310);
 	// チケット詳細のURL
 	define("DETAIL_URL", "ticketDetail.php");
 
-	$usr = new User(tempTwID);
+	$usr = new User($_SESSION['me']->id);
 	$allTicketID = $usr->getGotTickets();
 
 	// ----------HTMLで利用する変数----------

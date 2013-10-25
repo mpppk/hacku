@@ -1,11 +1,8 @@
 <?php
-	require_once("php/config.php");
-	require_once(dirname(__FILE__) . "/php/functions.php");
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	require_once(dirname(__FILE__) . "/php/allRequire.php");
 
-	// デバッグ用の定義
-	define("tempTwID", 127982310);
-
-	$usr = new User(tempTwID);
+	$usr = new User($_SESSION['me']->id);
 	$usrScreenName = $usr->getColumnValue("user_name");
 ?>
 

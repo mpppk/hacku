@@ -1,22 +1,28 @@
 <?php
-	require_once(dirname(__FILE__) . "/php/config.php");
-	require_once(dirname(__FILE__) . "/php/functions.php");
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	require_once(dirname(__FILE__) . "/php/allRequire.php");
+
+	if(!isset($_SESSION['me'])){
+		echo "session me timeout<br>";
+	}else{
+		var_dump($_SESSION['me']);
+	}
 
 	// デバッグ用の定義
-	define("tempTwID", 127982310);
+	// define("tempTwID", 127982310);
 
 	// ページURL
 	define("pageURL", "http://www6063ue.sakura.ne.jp/hacku/stamprallyDetail.php");
 
 	// session情報が取れているかどうか
-	session_start();
 	if(empty($_SESSION['currentCheckpoint'])){
+		echo "currentCheckpoint session timeout<br>";
 		$checkpointID = -999;
 	}else{
 		$checkpointID = $_SESSION['currentCheckpoint'];
 	}
 
-	$user = new User(tempTwID);
+	$user = new User($_SESSION['me']->id);
 	$userInfo = array();
 	$currentCheckpoint = new Checkpoint($checkpointID);
 	$currentCheckpointInfo = array();
@@ -75,7 +81,6 @@
 
 		}
 	}
-	echo "やるきあんのか！";
 	$currentGotTicketsInfo = array();
 	if(count($stamprallyInfo['allCurrentGotTicketID']) == 0){
 		$currentGotTicketsInfo[] = NULL;
@@ -95,44 +100,44 @@
 	}
 
 	// ---------- (デバッグ用) 保持しているデータ ----------
-	echo "ユーザーのデータ一覧<br>";
-	foreach ($userInfo as $value) {
-		var_dump($value);
-		echo "<br>";
-	}
-	echo "<br>";
+	// echo "ユーザーのデータ一覧<br>";
+	// foreach ($userInfo as $value) {
+	// 	var_dump($value);
+	// 	echo "<br>";
+	// }
+	// echo "<br>";
 
-	echo "スタンプラリーのデータ一覧<br>";
-	foreach ($stamprallyInfo as $value) {
-		var_dump($value);
-		echo "<br>";
-	}
-	echo "<br>";
+	// echo "スタンプラリーのデータ一覧<br>";
+	// foreach ($stamprallyInfo as $value) {
+	// 	var_dump($value);
+	// 	echo "<br>";
+	// }
+	// echo "<br>";
 
-	echo "チェックポイントのデータ一覧<br>";
-	foreach ($currentCheckpointInfo as $value) {
-		var_dump($value);
-		echo "<br>";
-	}
-	echo "<br>";
+	// echo "チェックポイントのデータ一覧<br>";
+	// foreach ($currentCheckpointInfo as $value) {
+	// 	var_dump($value);
+	// 	echo "<br>";
+	// }
+	// echo "<br>";
 
-	echo "チェックポイントのデータ一覧<br>";
-	if($stamprallyInfo['allCurrentGotTicketID'][0] == NULL){
-		echo "allCurrentGotTicketID is null";
-	}
-	foreach ($stamprallyInfo['allCurrentGotTicketID'] as $value) {
-		var_dump($value);
-		echo "<br>";
-	}
-	echo "<br>";
+	// echo "チェックポイントのデータ一覧<br>";
+	// if($stamprallyInfo['allCurrentGotTicketID'][0] == NULL){
+	// 	echo "allCurrentGotTicketID is null";
+	// }
+	// foreach ($stamprallyInfo['allCurrentGotTicketID'] as $value) {
+	// 	var_dump($value);
+	// 	echo "<br>";
+	// }
+	// echo "<br>";
 
-	if($currentGotTicketsInfo == NULL){
-		echo "currentGotTicketInfo is null<br>";
-	}else{
-		echo "currentGotTicketsInfo<br>";
-		var_dump($currentGotTicketsInfo);
-		echo "<br>";
-	}
+	// if($currentGotTicketsInfo == NULL){
+	// 	echo "currentGotTicketInfo is null<br>";
+	// }else{
+	// 	echo "currentGotTicketsInfo<br>";
+	// 	var_dump($currentGotTicketsInfo);
+	// 	echo "<br>";
+	// }
 
 	// if($isCheckedCheckpoint){
 	// 	echo "isCheckedCheckpoint is TRUE";

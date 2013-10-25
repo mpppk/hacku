@@ -1,4 +1,5 @@
 <?php
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	require_once("php/config.php");
 	require_once("php/usefulfuncs.php");
 	require_once(dirname(__FILE__) . "/php/functions.php");
@@ -42,11 +43,10 @@
 		$tempTicketInfo['requiredCheckpointNum'] = $ticket->getColumnValue("required_checkpoint_num");
 		$tempTicketInfo['limitTicketNum'] = $ticket->getColumnValue("limit_ticket_num");
 		if($userInfo['allCheckedCheckpointsNum'] >= $tempTicketInfo['requiredCheckpointNum']){
-			echo "とってるで<br>";
-			$tempTicketInfo['gotMsg'] = "取得済み";
+			$tempTicketInfo['gotMsg'] = "取得済み!";
 		}else{
-			echo "とってないで<br>";
-			$tempTicketInfo['gotMsg'] = "";
+			$reminingRequiredTicketsNum = $tempTicketInfo['requiredCheckpointNum'] - $userInfo['allCheckedCheckpointsNum'];
+			$tempTicketInfo['gotMsg'] = "あと". $reminingRequiredTicketsNum. "チェックで獲得!";
 		}
 		array_push($allTicketInfo, $tempTicketInfo);
 		// var_dump($tempTicketInfo);

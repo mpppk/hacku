@@ -75,6 +75,16 @@ class User {
 		return $res;
 	}
 	
+	// 指定したスタンプラリーに参加しているかどうかを返す 参加中 = true  未参加 = false
+	public function isJoinStamprally($stamprallyID) {
+		$joins = $this->getAllJoinedStamprallyID();
+		foreach($joins as $join) {
+			if($join == $stamprallyID)
+				return true;
+		}
+		return false;
+	}
+	
 	// このユーザーが管理しているスタンプラリーIDを返す関数
 	public function getAllManagedStamprallyID() {
 		$dbh = connectDB();
@@ -99,11 +109,39 @@ class User {
 		return $res;
 	}
 	
+	// このユーザーが獲得済みかつ使用済みのチケットIDを全て返す関数
+	public function getGotUsedTickets() {
+		$dbh = connectDB();
+		$sql = "SELECT * FROM `got_tickets` WHERE user_id = '$this->_userID' AND exchanged_ticket = TRUE";
+		
+		$res = array();
+		foreach ($dbh->query($sql) as $row) {
+			array_push($res, (int)$row['ticket_id']);
+		}
+		return $res;
+	}
+	
 	// 指定したチケットを所持していれば使用済みにする
 	public function useTicket($ticketID) {
 		$dbh = connectDB();
 		$sql = "UPDATE `got_tickets` SET exchanged_ticket = TRUE, modified = now() WHERE user_id = '$this->_userID' AND ticket_id = '$ticketID'";
 		$dbh->query($sql);
+	}
+	
+	//  指定したチケットを 所持 /使用しているかどうかを返す 未所持 = 0 所持かつ未使用 = 1 使用済み = 2
+	public function getTicketState($ticketID) {
+		$gets = $this->getGotTickets();
+		$uses = $this->getGotUsedTickets();
+		
+		foreach($gets as $get) {
+			if($get == $ticketID)
+				return 1;
+		}
+		foreach($uses as $use) {
+			if($use == $ticketID)
+				return 2;
+		}
+		return 0;
 	}
 	
 	// 指定したチェックポイントをチェック済みにする
@@ -175,8 +213,33 @@ class StampRally {
 	}
 	
 	// このスタンプラリーを削除する
+	// 同時にそのスタンプラリーに属するチケットとチェックポイントも削除する
 	public function remove() {
 		$dbh = connectDB();
+		
+		// 獲得したチケット削除
+		$gets = $this->getAllTicketID();
+		foreach($gets as $get) {
+			$sql = "DELETE FROM `got_tickets` WHERE ticket_id = '$get'";
+			$dbh->query($sql);
+		}
+		
+		// チケット削除
+		$sql = "DELETE FROM `tickets` WHERE stamprally_id = '$this->_stamprallyID'";
+		$dbh->query($sql);
+		
+		// チェックしたチェックポイント削除
+		$cps = $this->getAllCheckpointID();
+		foreach($cps as $cp) {
+			$sql = "DELETE FROM `checked_checkpoints` WHERE checkpoint_id = '$cp'";
+			$dbh->query($sql);
+		}
+		
+		// チェックポイント削除
+		$sql = "DELETE FROM `checkpoints` WHERE stamprally_id = '$this->_stamprallyID'";
+		$dbh->query($sql);
+		
+		// スタンプラリー削除
 		$sql = "DELETE FROM `stamprallies` WHERE stamprally_id = '$this->_stamprallyID'";
 		$dbh->query($sql);
 	}
@@ -336,6 +399,8 @@ class Checkpoint {
 //var_dump( $u->getGotTickets() );
 //$u->useTicket(3);
 //var_dump( $u->getColumnValue('screen_name') );
+//var_dump( $u->isJoinStamprally(1) );
+//var_dump( $u->getTicketState(1) );
 
 //$sr = new StampRally(1);
 //$sr->update('わかやまウォーク', null, null, null, null, null, null, null, null);	// わかやまウォーク
@@ -343,6 +408,9 @@ class Checkpoint {
 //$sr->update(null, null, null, '和歌山城公園', null, null, null, null, null);	// 和歌山城公園
 //var_dump( $sr->getAllJoinedUserID() );
 //var_dump( $sr->getAllTicketID() );
+
+//$sr = new StampRally(81);
+//$sr->remove();
 
 //StampRally::add('すたんぽぷろじぇくと', 1234, 'ブリティッシュコロンビア大学', "たのしいだいがく", '2013-10-10 00:00:00', '2013-10-15 12:30:00');
 //$s = new StampRally(3);

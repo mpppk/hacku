@@ -1,4 +1,5 @@
 <?php
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	require_once(dirname(__FILE__) . "/php/config.php");
 	require_once(dirname(__FILE__) . "/php/functions.php");
 
@@ -8,7 +9,7 @@
 	// スタンプラリー詳細のURL
 	define("DETAIL_URL", "stamprallyDetail.php");
 
-	$usr = new User(tempTwID);
+	$usr = new User($_SESSION['me']->id);
 	$allJoinedStamprallyID = $usr->getAllJoinedStamprallyID();
 	
 	// ----------HTMLで利用する変数----------

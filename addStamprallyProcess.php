@@ -1,9 +1,10 @@
 <?php
-	require_once("php/config.php");
-	require_once(dirname(__FILE__) . "/php/functions.php");
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	require_once(dirname(__FILE__) . "/php/allRequire.php");
+
 
 	// デバッグ用の定義
-	define("tempTwID", 127982310);
+	// define("tempTwID", 127982310);
 
 	// 
 	$startDate = $_POST["startDay"]. " ". $_POST["startTime"]. ":00";
@@ -16,7 +17,7 @@
 	//var_dump($coordinates);
 
 	$addedStamprallyID = StampRally::add($_POST["stamprallyName"],
-		tempTwID,
+		$_SESSION['me']->id,
 		$_POST["place"],
 		$_POST["description"],
 		$startDate,

@@ -1,15 +1,16 @@
 <?php
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	require_once(dirname(__FILE__) . "/php/config.php");
 	require_once(dirname(__FILE__) . "/php/functions.php");
 
 	// デバッグ用の定義
-	define("tempTwID", 127982310);
+	// define("tempTwID", 127982310);
 
 	// スタンプラリー詳細のURL
 	define("DETAIL_URL", "stamprallyDetail.php");
 	define("EDIT_URL", "editStamprally.php");
 
-	$usr = new User(tempTwID);
+	$usr = new User($_SESSION['me']->id);
 	$allManagedStamprallyID = $usr->getAllManagedStamprallyID();
 	
 	// ----------HTMLで利用する変数----------

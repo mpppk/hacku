@@ -1,10 +1,6 @@
 <?php
-	require_once("php/config.php");
-	require_once(dirname(__FILE__) . "/php/functions.php");
-
-
-	// デバッグ用の定義
-	define("tempTwID", 127982310);
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	require_once(dirname(__FILE__) . "/php/allRequire.php");k
 
 	//var_dump($_POST);
 	$stamprallyID = (int)$_POST['stamprallyID'];

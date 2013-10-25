@@ -1,5 +1,11 @@
 <?php
-    require_once("php/config.php");
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	// if (!isset($_SESSION['me']) && !isset($_GET['dbg'])) {
+	//     echo "(in checkCheckpointProcess.php)user session timeout.<br>";exit();
+	// }
+	$_SESSION['beforeURL'] = "http://www.creagp.com/hacku/checkCheckpointProcess.php". "?id=". $_GET['id'];
+
+	require_once(dirname(__FILE__) . "/php/allRequire.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +34,9 @@
 		    threshold: threshold
 		}, function(rs) {
 			if(rs == "1" || rs == "-1"){// 成功時orスタンプラリーの緯度経度が登録されていない時
-				<?php session_start();
+				<?php 
 				$_SESSION["currentCheckpoint"] = $_GET['id']; ?>
+				// location.href = 'checkCheckpoint.php';
 				location.href = 'checkCheckpoint.php';
 			}
 			if(rs == "0"){// 失敗時
