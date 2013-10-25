@@ -1,5 +1,6 @@
 <?php
 	require_once(dirname(__FILE__) . "/php/sessionInit.php");
+	require_once(dirname(__FILE__) . "/php/functions.php");
 	require_once(dirname(__FILE__) . "/php/allRequire.php");
 
 	if(!isset($_SESSION['me'])){
@@ -24,6 +25,7 @@
 
 	$user = new User($_SESSION['me']->id);
 	$userInfo = array();
+	$userInfo['id'] = $_SESSION['me']->id;
 	$currentCheckpoint = new Checkpoint($checkpointID);
 	$currentCheckpointInfo = array();
 	
@@ -64,6 +66,11 @@
 
 	// チェック済みでなければチェックする
 	if($isCheckedCheckpoint == false){
+		// このチェックポイントが所属するスタンプラリーに参加する
+		echo "userID: ". $userInfo['id']. "<br>";
+		echo "stamprallyID: ". $currentCheckpointInfo['stamprallyID']. "<br>";
+		$user->joinStamprally($currentCheckpointInfo['stamprallyID']);
+
 		$user->checkCheckpoint($checkpointID);
 		$userInfo['allCheckedCheckpointsNum']++;
 		$chkMsg = $currentCheckpointInfo['name']. 'にチェックしました!';
@@ -101,8 +108,8 @@
 
 	// ---------- (デバッグ用) 保持しているデータ ----------
 	// echo "ユーザーのデータ一覧<br>";
-	// foreach ($userInfo as $value) {
-	// 	var_dump($value);
+	// foreach ($userInfo as $key => $value) {
+	// 	echo $key. ": ". $value;
 	// 	echo "<br>";
 	// }
 	// echo "<br>";

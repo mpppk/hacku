@@ -1,14 +1,16 @@
 <?php
 // ライブラリ読み込み
-require_once(dirname(__FILE__) . "/sessionInit.php");
 require_once(dirname(__FILE__). '/config.php');
 require_once(dirname(__FILE__). '/UltimateOAuth.php');
-
-$beforeURL = $_SESSION['beforeURL'];
-$_SESSION['nextURL'] = $beforeURL;
+// session_set_cookie_params( 1440 );
+session_start();
+// require_once(dirname(__FILE__) . "/sessionInit.php");
+// $beforeURL = $_SESSION['beforeURL'];
+// $_SESSION['nextURL'] = $beforeURL;
 // UltimateOAuthオブジェクトを新規作成してセッションに保存
 $_SESSION['uo'] = new UltimateOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 $uo = $_SESSION['uo'];
+// var_dump($uo);exit();
 // リクエストトークンを取得
 $res = $uo->post('oauth/request_token');
 if (isset($res->errors)) {

@@ -2,24 +2,26 @@
     require_once(dirname(__FILE__) . "/php/sessionInit.php");
     require_once(dirname(__FILE__). "/php/config.php");
     require_once(dirname(__FILE__). "/php/getLoginInfo.php");
-    echo session_id(). "<br>";
-    if(!isset($_SESSION['me'])){
-        echo "in index session me timeout<br>";
-    }else{
-        echo "you have session me<br>";
-    }
+    echo "session_id: ". session_id(). "<br>";
+    $_SESSION['targetURL'] = "http://www6063ue.sakura.ne.jp/hacku/index.php";
+    // echo session_id(). "<br>";
+    // if(!isset($_SESSION['me'])){
+    //     echo "in index session me timeout<br>";
+    // }else{
+    //     echo "you have session me<br>";
+    // }
 
-    $nextURL = "a";
-    // よく分からんけど、twitterログイン後、index.php以外に飛ぶとエラーになるのでここで処理する
-    if (isset($_SESSION['nextURL'])) {
-        $nextURL = $_SESSION['nextURL'];
-        echo "session nextURL exist: ". $nextURL. "<br>";
-        unset($_SESSION['beforeURL']);
-        unset($_SESSION['nextURL']);
-        // header('Location: '. $nextURL. "?". session_name(). "=". session_id());exit();
-    }else{
-        echo "session nextURLはないで<br>";
-    }
+    // $nextURL = "a";
+    // // よく分からんけど、twitterログイン後、index.php以外に飛ぶとエラーになるのでここで処理する
+    // if (isset($_SESSION['nextURL'])) {
+    //     $nextURL = $_SESSION['nextURL'];
+    //     echo "session nextURL exist: ". $nextURL. "<br>";
+    //     unset($_SESSION['beforeURL']);
+    //     unset($_SESSION['nextURL']);
+    //     // header('Location: '. $nextURL. "?". session_name(). "=". session_id());exit();
+    // }else{
+    //     echo "session nextURLはないで<br>";
+    // }
 ?>
 
 <!DOCTYPE html>

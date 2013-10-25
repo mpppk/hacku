@@ -166,10 +166,11 @@ class User {
 		$sql = "INSERT INTO `participants` (user_id, stamprally_id, created, modified) ";
 		$sql.= "VALUES ('$this->_userID', '$stamprallyID', now(), now())";
 		$dbh->query($sql);
+		// echo "sql: ". $sql. "<br>";
 	}
 	
 	// 新しくユーザーを作成する関数
-	public static function add($userID, $screenName, $accessToken, $accessTokenSecret, $userName, $startDate, $endDate) {
+	public static function add($userID, $screenName, $accessToken, $accessTokenSecret, $userName) {
 		$dbh = connectDB();
 		$sql = "INSERT INTO `users` (user_id, screen_name, access_token, access_token_secret, user_name, created, modified) ";
 		$sql.= "VALUES ('$userID', '$screenName', '$accessToken', '$accessTokenSecret', '$userName', now(), now())";
@@ -401,6 +402,10 @@ class Checkpoint {
 //var_dump( $u->getColumnValue('screen_name') );
 //var_dump( $u->isJoinStamprally(1) );
 //var_dump( $u->getTicketState(1) );
+
+//User::add(128,'b','a', 'a',null);
+//$u = new User(128);
+//$u->joinStamprally(1);
 
 //$sr = new StampRally(1);
 //$sr->update('わかやまウォーク', null, null, null, null, null, null, null, null);	// わかやまウォーク

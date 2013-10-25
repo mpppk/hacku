@@ -1,6 +1,6 @@
 <?php
 	require_once(dirname(__FILE__) . "/php/sessionInit.php");
-	require_once(dirname(__FILE__) . "/php/allRequire.php");k
+	require_once(dirname(__FILE__) . "/php/allRequire.php");
 
 	//var_dump($_POST);
 	$stamprallyID = (int)$_POST['stamprallyID'];

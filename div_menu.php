@@ -7,7 +7,7 @@
 <div id="menu">
 	<div id="accountInfo">
 		<?php if(isset($_SESSION['me'])): ?>
-			<img src=<?php echo h($_SESSION['me']->profile_image_url); ?> width="40">
+			<img class="img" src=<?php echo h($_SESSION['me']->profile_image_url); ?> width="40">
 			<p><?php echo h($_SESSION['me']->screen_name); ?>さん</p>
 		<?php else: ?>
 			<p>guestさん</p>

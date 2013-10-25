@@ -1,4 +1,5 @@
 <?php
+	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	require_once(dirname(__FILE__) . "/php/allRequire.php");
 
 	// デバッグ用の定義
@@ -62,25 +63,26 @@
 
 </head>
 <body>
-<?php include (HEADER_NAME); ?>
-<?php include (MENU_NAME); ?>
-<div id="main">
-	<div id="contents">
-		<h1>新しいチケットを登録しました!</h1>
-		<?php foreach($pos as $p): ?>
-		<p>チケット名：<?php echo $p[$name]; ?></p>
-		<p>説明：<?php echo $p[$desc]; ?></p>
-		<p>種類：<?php echo $typeName[$p[$type]]; ?></p>
-		<p>上限枚数：<?php echo $p[$lmtTNum]; ?></p>
-		<p>交換期限：<?php echo $p[$lmtDate]; ?></p>
-		<p>チケット獲得に必要なチェックポイント数：<?php echo $p[$reqCNum]; ?></p>
-		<p>--------------------------------------------------------------------------------</p>
-		<?php endforeach; ?>
-		
-		
+<div id="page">
+	<?php include (HEADER_NAME); ?>
+	<div id = "contents">
+		<?php include (MENU_NAME); ?>
+		<div id="main">
+			<h1>新しいチケットを登録しました!</h1>
+			<?php foreach($pos as $p): ?>
+			<p>チケット名：<?php echo $p[$name]; ?></p>
+			<p>説明：<?php echo $p[$desc]; ?></p>
+			<p>種類：<?php echo $typeName[$p[$type]]; ?></p>
+			<p>上限枚数：<?php echo $p[$lmtTNum]; ?></p>
+			<p>交換期限：<?php echo $p[$lmtDate]; ?></p>
+			<p>チケット獲得に必要なチェックポイント数：<?php echo $p[$reqCNum]; ?></p>
+			<p>--------------------------------------------------------------------------------</p>
+			<?php endforeach; ?>
+		</div>
+		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
-<?php include (FOOTER_NAME); ?>
+
 </body>
 <script>
 

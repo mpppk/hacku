@@ -1,11 +1,14 @@
 <?php
+	require_once(dirname(__FILE__) . '/php/UltimateOAuth.php');
 	require_once(dirname(__FILE__) . "/php/sessionInit.php");
 	// if (!isset($_SESSION['me']) && !isset($_GET['dbg'])) {
 	//     echo "(in checkCheckpointProcess.php)user session timeout.<br>";exit();
 	// }
-	$_SESSION['beforeURL'] = "http://www.creagp.com/hacku/checkCheckpointProcess.php". "?id=". $_GET['id'];
+	$_SESSION['targetURL'] = "http://www6063ue.sakura.ne.jp/hacku/checkCheckpointProcess.php". "?id=". $_GET['id'];
 
 	require_once(dirname(__FILE__) . "/php/allRequire.php");
+	// echo "session_id: ". session_id(). "<br>";
+
 ?>
 
 <!DOCTYPE html>
@@ -17,13 +20,16 @@
    	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 </head>
 <body>
+	チェックポイントにとばすで
 </body>
 <script>
 	//ユーザーの現在の位置情報を取得
+	alert("script start");
 	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 	/***** ユーザーの現在の位置情報を取得 *****/
 	function successCallback(position) {
+		alert("successCallback start");
 		var currentPostionLat = position.coords.latitude;
 		var currentPostionLon = position.coords.longitude;
 		var threshold = 10;
@@ -40,6 +46,7 @@
 				location.href = 'checkCheckpoint.php';
 			}
 			if(rs == "0"){// 失敗時
+				// location.href = 'checkCheckpoint.php';
 				alert("GPSをONにしてください!: " + rs);
 			}
 		});
@@ -47,7 +54,8 @@
 
 	/***** 位置情報が取得できない場合 *****/
 	function errorCallback(error) {
-		var err_msg = "";
+		alert("errorCallback start");
+		var err_msg = "位置情報取得失敗したで";
 		switch(error.code){
 			case 1:
 				err_msg = "位置情報の利用が許可されていません";
@@ -59,6 +67,7 @@
 				err_msg = "タイムアウトしました";
 				break;
 		}
+		location.href = 'checkCheckpoint.php';
 		document.getElementById("show_result").innerHTML = err_msg;
 		//デバッグ用→　document.getElementById("show_result").innerHTML = error.message;
 	}

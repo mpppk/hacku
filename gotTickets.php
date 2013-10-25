@@ -51,7 +51,7 @@
 					</li>
 				<?php endforeach; ?>
 			</ul>
-<div>
+		</div>
 		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
