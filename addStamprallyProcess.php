@@ -42,42 +42,49 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>EasyStamp!!</title>
+    <title>EasyRally!!</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="css/hacku.css">
+    <link rel="stylesheet" href="css/hacku2.css">
 
 </head>
 <body>
-<?php include (HEADER_NAME); ?>
-<?php include (MENU_NAME); ?>
-<div id="main">
-	<div id="contents">
-		<h1>新しいスタンプラリーを登録しました!</h1>
- 		<p>スタンプラリー名：<?php echo $_POST["stamprallyName"]; ?></p>
-		<p>場所：<?php echo $_POST["place"]; ?></p>
-		<p>説明:<?php echo $_POST["description"]; ?></p>
-		<p>開始日時:<?php echo $startDate; ?></p>
-		<p>終了日時:<?php echo $endDate; ?></p>
-		
-		<h1>チェックポイントを登録してください（仮）</h1>
-		<form action="addCheckpointProcess.php" method="post">
-		<input type="hidden" name="stamprallyID" value="<?php echo $addedStamprallyID; ?>">
-		<div id="points">
-			<div class="point" id="point0" data-id="0">
-				<p>チェックポイント名: <input type="text" name="pointName0" value="tempPointName"></p>
-				<p>概要説明: <input type="text" name="publicDescription0" value="tempDescription"></p>
-				<p>詳細説明: <input type="text" name="privateDescription0" value="tempDescription"></p>
-				<p><input type="button" class="removePoint" value="削除"></p>
-				<p>--------------------------------------------------------------------------------</p>
-			</div>
+<?php include (HEADER2_NAME); ?>
+<div id="page">
+		<div id="contents">
+		<?php include (MENU_NAME); ?>
+        	<div id="main">
+			<h1>新しいスタンプラリーを登録しました!</h1>
+	 		<p>スタンプラリー名：<?php echo $_POST["stamprallyName"]; ?></p>
+			<p>場所：<?php echo $_POST["place"]; ?></p>
+			<p>説明:<?php echo $_POST["description"]; ?></p>
+			<p>開始日時:<?php echo $startDate; ?></p>
+			<p>終了日時:<?php echo $endDate; ?></p>
+            <hr>
+            
+			
+			<h1>チェックポイントを登録してください（仮）</h1>
+			<form action="addCheckpointProcess.php" method="post">
+			<input type="hidden" name="stamprallyID" value="<?php echo $addedStamprallyID; ?>">
+			<div id="points">
+				<div class="point" id="point0" data-id="0">
+                <table class = "table">
+					<tr><th>チェックポイント名: </th><th><input type="text" name="pointName0" value="tempPointName"></th></tr>
+					<tr><th>概要説明: </th><th><input type="text" name="publicDescription0" value="tempDescription"></th></tr>
+					<tr><th>詳細説明: </th><th><input type="text" name="privateDescription0" value="tempDescription"></th></tr>
+					<tr><th colspan=2><input type="button" class="removePoint" value="削除"></th></tr>
+				</table>
+                <hr>
+                </div>
+                </div>
+            	<table class="table">
+                	<tr><th colspan=2><input type="button" id="addPoint" value="チェックポイント追加"></th></tr>
+            		<tr><th colspan=2><input type="submit" /></th></tr>
+                </table>
+                </form>
+            </div>
 		</div>
-		<p><input type="button" id="addPoint" value="チェックポイント追加"></p>
-		<input type="submit" />
-		</form>
-		
-	</div>
-</div>
+    </div>
 <?php include (FOOTER_NAME); ?>
 </body>
 <script>
@@ -85,18 +92,21 @@ $(document).on('click', '#addPoint', function() {
 	var id = $('.point').last().data('id');
 	id += 1;
 	var html = '<div class="point" id="point'+id+'" data-id="'+id+'">'
-			+'<p>チェックポイント名: <input type="text" name="pointName'+id+'" value="tempPointName"></p>'
-			+'<p>概要説明: <input type="text" name="publicDescription'+id+'" value="tempDescription"></p>'
-			+'<p>詳細説明: <input type="text" name="privateDescription'+id+'" value="tempDescription"></p>'
-			+'<p><input type="button" class="removePoint" value="削除"></p>'
-			+'<p>--------------------------------------------------------------------------------</p>'
+			+'<table class = "table">'
+			+'<tr><th><p>チェックポイント名: </th><th><input type="text" name="pointName'+id+'" value="tempPointName"></p></th></tr>'
+			+'<tr><th><p>概要説明: </th><th><input type="text" name="publicDescription'+id+'" value="tempDescription"></p></th></tr>'
+			+'<tr><th><p>詳細説明: </th><th><input type="text" name="privateDescription'+id+'" value="tempDescription"></p></th></tr>'
+			+'<tr><th colspan=2><input type="button" class="removePoint" value="削除"></th></tr>'
+			+'</table>'
+			+'<hr>'
 			+'</div>';
 	$('#points').append(html);
 });
 
 $(document).on('click', '.removePoint', function() {
-	var id = $(this).parent().parent().attr('data-id');
+	var id = $(this).parent().parent().parent().parent().parent().attr('data-id');
 	var last_id = $('.point').last().attr('data-id');
+	//alert(id+' '+last_id);
 	
 	if(last_id != 0) {
 		$('#point'+id).remove();

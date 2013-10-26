@@ -24,12 +24,11 @@
 </body>
 <script>
 	//ユーザーの現在の位置情報を取得
-	alert("script start");
 	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 	/***** ユーザーの現在の位置情報を取得 *****/
 	function successCallback(position) {
-		alert("successCallback start");
+		alert("successCallback");
 		var currentPostionLat = position.coords.latitude;
 		var currentPostionLon = position.coords.longitude;
 		var threshold = 10;
@@ -54,16 +53,18 @@
 
 	/***** 位置情報が取得できない場合 *****/
 	function errorCallback(error) {
-		alert("errorCallback start");
 		var err_msg = "位置情報取得失敗したで";
 		switch(error.code){
 			case 1:
+				alert("位置情報の利用が許可されていませんがデモなので無視しマース");
 				err_msg = "位置情報の利用が許可されていません";
 				break;
 			case 2:
+				alert("デバイスの位置が判定できませんがデモなので無視しマース");
 				err_msg = "デバイスの位置が判定できません";
 				break;
 			case 3:
+				alert("タイムアウトしたけどデモなので無視しマース");
 				err_msg = "タイムアウトしました";
 				break;
 		}

@@ -4,7 +4,7 @@
 	require_once(dirname(__FILE__) . "/php/functions.php");
 
 	// デバッグ用の定義
-	define("tempTwID", 127982310);
+	// define("tempTwID", 127982310);
 
 	// スタンプラリー詳細のURL
 	define("DETAIL_URL", "stamprallyDetail.php");
@@ -34,12 +34,12 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>EasyStamp!!</title>
+    <title>参加中のスタンプラリー - EasyRally</title>
     <link rel="stylesheet" href="css/hacku.css">
 </head>
 <body>
+<?php include (HEADER_NAME); ?>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
@@ -54,9 +54,9 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
+<?php include (FOOTER_NAME); ?>
 </body>
 </html>
 

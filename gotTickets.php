@@ -31,16 +31,16 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>EasyStamp!!</title>
+    <title>取得したチケット一覧 - EasyRally</title>
     <link rel="stylesheet" href="css/hacku.css">
 </head>
 <body>
+<?php include (HEADER_NAME); ?>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
-			<h1>チケット一覧</h1>
+			<h1><img src="imgs/ticketichiran01.gif"></h1>
 			<!-- 取得済みチケットを表示 -->
 			<ul>
 				<?php foreach ($allTicketInfo as $ticketInfo) : ?>
@@ -52,9 +52,9 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
+<?php include (FOOTER_NAME); ?>
 </body>
 </html>
 

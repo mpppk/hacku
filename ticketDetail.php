@@ -18,12 +18,12 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>EasyStamp!!</title>
+    <title>チケット詳細 - EasyRally</title>
     <link rel="stylesheet" href="css/hacku.css">
 </head>
 <body>
+<?php include (HEADER_NAME); ?>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
@@ -34,9 +34,9 @@
 			<p>必要チェックポイント数:<?php echo h($ticketInfo['requiredCheckpointNum']);?></p>
 			<p>残り配布枚数:<?php echo h($ticketInfo['limitTicketNum']);?></p>
 		</div>
-		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
+<?php include (FOOTER_NAME); ?>
 </body>
 </html>
 

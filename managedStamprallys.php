@@ -7,7 +7,7 @@
 	// define("tempTwID", 127982310);
 
 	// スタンプラリー詳細のURL
-	define("DETAIL_URL", "stamprallyDetail.php");
+	define("DETAIL_URL", "managedStamprallyDetail.php");
 	define("EDIT_URL", "editStamprally.php");
 
 	$usr = new User($_SESSION['me']->id);
@@ -37,15 +37,15 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>EasyRally!!</title>
+    <title>管理中のスタンプラリー - EasyRally</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
    	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="css/hacku.css">
+    <link rel="stylesheet" href="css/hacku2.css">
     <link rel="stylesheet" href="css/deleteStamprally.css">
 </head>
 <body>
+<?php include (HEADER2_NAME); ?>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
@@ -62,9 +62,9 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<?php include (FOOTER_NAME); ?>
 	</div>
 </div>
+<?php include (FOOTER_NAME); ?>
 
 <script>
 $(document).on('click', '.deleteStamprally', function() {

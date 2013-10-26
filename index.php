@@ -32,8 +32,8 @@
     <link rel="stylesheet" href="css/hacku.css">
 </head>
 <body>
-<div id="page">
 <?php include (HEADER_NAME); ?> 
+<div id="page">
 <div id = "contents">
     <?php include (MENU_NAME); ?>
 	<div id="main">
@@ -73,9 +73,9 @@
             </div>
             
 	</div>
-    <?php include (FOOTER_NAME); ?>
 </div>
 </div>
+<?php include (FOOTER_NAME); ?>
 
 </body>
 </html>

@@ -1,1 +1,1 @@
-<div id="footer">footerでGOZARU!!!!!!!!!</div>
+<div id="footer">Copyright (C) 2013 HMM.All rights reserved.</div>

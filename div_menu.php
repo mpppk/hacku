@@ -5,6 +5,7 @@
 
 
 <div id="menu">
+
 	<div id="accountInfo">
 		<?php if(isset($_SESSION['me'])): ?>
 			<img class="img" src=<?php echo h($_SESSION['me']->profile_image_url); ?> width="40">
@@ -12,6 +13,14 @@
 		<?php else: ?>
 			<p>guestさん</p>
 		<?php endif; ?>
+		<div id="login">
+			<?php if(!isset($_SESSION['me'])): ?>
+				<h1><a href="php/login.php"><img src="imgs/login_min_01.gif"></h1></a>
+			<?php else: ?>
+				<h3><a href="php/logout.php"><img src="imgs/logout_min_01.gif"></h3></a>
+			<?php endif; ?>
+		</div>
+
 	</div>
 	<div id="joinMenu">
 		<span class="menuTitle"><img src="imgs/sankasuru01.gif" ></span>

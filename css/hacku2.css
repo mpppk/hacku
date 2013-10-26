@@ -20,7 +20,7 @@ body {
 	color: #333;
 	text-align: center;
 	background-color: #FDFDFD;
-	background-image:url(../imgs/back02.jpg);
+	background-image:url(../imgs/back05.jpg);
 	background-position: top;
 }
 
@@ -33,7 +33,7 @@ img{
 hr{
 	margin:2% auto;
 	width:80%;
-	border: dashed #A0C523 1px;
+	border: dashed #C30D23 1px;
 }
 
 p, 
@@ -83,8 +83,8 @@ th{
 #header {
 	height: 90px;
 	background-color: #FDFDFD;
-	border-top: 10px solid #A0C523;
-	border-bottom:15px solid #A0C523;
+	border-top: 10px solid #C30D23;
+	border-bottom:15px solid #C30D23;
 	color: #FFFFFF;
 	box-shadow:0px 0px 5px #999;
 	opacity:0.8;
@@ -121,7 +121,7 @@ th{
 	width: 65%;
 	border-style: dashed;
 	border-width: 2px;
-	border-color:#A0C523;
+	border-color:#C30D23;
 	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
 	box-shadow:0px 0px 5px #999;
 	background-color: #FDFDFD;
@@ -220,7 +220,7 @@ th{
 
 input{
 	border:0;
-	padding:5px;
+	padding:1%;
 	font-size:100%;
 	color:#aaa;
 	border:solid 1px #ccc;
@@ -259,7 +259,7 @@ input[type=submit]{
 }
 
 input[type=button] {
-	font-size:120%;
+	font-size:16px;
 	font-family:Georgia;
 	font-weight:normal;
 	-moz-border-radius:10px;
@@ -280,8 +280,6 @@ input[type=button] {
  	-moz-box-shadow:inset 1px 1px 2px 0px #fceaca;
  	box-shadow:inset 1px 1px 2px 0px #fceaca;
 }
-
-
 
 /* ========================================  menu 左サイドメニュー */
 #menu {
@@ -387,7 +385,7 @@ input[type=button] {
 	padding: 10px 0px;
 	color: #FFFFFF;
 	text-align: center;
-	background-color: #357709;
+	background-color: #C30D23;
 	clear:both;
 }
 

@@ -6,7 +6,7 @@
 	if(!isset($_SESSION['me'])){
 		echo "session me timeout<br>";
 	}else{
-		var_dump($_SESSION['me']);
+		// var_dump($_SESSION['me']);
 	}
 
 	// デバッグ用の定義
@@ -67,8 +67,6 @@
 	// チェック済みでなければチェックする
 	if($isCheckedCheckpoint == false){
 		// このチェックポイントが所属するスタンプラリーに参加する
-		echo "userID: ". $userInfo['id']. "<br>";
-		echo "stamprallyID: ". $currentCheckpointInfo['stamprallyID']. "<br>";
 		$user->joinStamprally($currentCheckpointInfo['stamprallyID']);
 
 		$user->checkCheckpoint($checkpointID);
@@ -85,6 +83,8 @@
 		$tempTicket = new Ticket($ticketID);
 		if($userInfo['allCheckedCheckpointsNum'] == $tempTicket->getColumnValue('required_checkpoint_num')){
 			array_push($stamprallyInfo['allCurrentGotTicketID'], $ticketID);
+			// 取得済みチケットをユーザーに追加
+			$user->getTicket($ticketID);
 
 		}
 	}
@@ -170,8 +170,8 @@
     <link rel="stylesheet" href="css/deleteStamprally.css">
 </head>
 <body>
+<?php include (HEADER_NAME); ?>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
@@ -193,9 +193,9 @@
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</div><!-- main -->
-		<?php include (FOOTER_NAME); ?>
 	</div><!-- contents -->
 </div><!-- page -->
+<?php include (FOOTER_NAME); ?>
 </body>
 </html>
 

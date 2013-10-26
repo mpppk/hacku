@@ -175,6 +175,7 @@ class User {
 		$sql = "INSERT INTO `users` (user_id, screen_name, access_token, access_token_secret, user_name, created, modified) ";
 		$sql.= "VALUES ('$userID', '$screenName', '$accessToken', '$accessTokenSecret', '$userName', now(), now())";
 		$dbh->query($sql);
+		return $dbh->lastInsertId();
 	}
 	
 }
@@ -238,6 +239,10 @@ class StampRally {
 		
 		// チェックポイント削除
 		$sql = "DELETE FROM `checkpoints` WHERE stamprally_id = '$this->_stamprallyID'";
+		$dbh->query($sql);
+		
+		// スタンプラリーに参加している情報削除
+		$sql = "DELETE FROM `participants` WHERE stamprally_id = '$this->_stamprallyID'";
 		$dbh->query($sql);
 		
 		// スタンプラリー削除
@@ -308,7 +313,7 @@ class Ticket {
 	}
 	
 	// このチケット情報を更新する
-	public function update($stamprallyID, $ticketName, $description, $limitDate, $requiredCheckpointNum, $limitTicketNum, $type) {
+	public function update($stamprallyID, $ticketName, $description, $limitDate, $requiredCheckpointNum, $limitTicketNum, $type, $url) {
 		$dbh = connectDB();
 		$sql = "UPDATE `tickets` SET ";
 		if($stamprallyID != null)			$sql.= "stamprally_id = '$stamprallyID', ";
@@ -318,6 +323,7 @@ class Ticket {
 		if($requiredCheckpointNum != null)	$sql.= "required_checkpoint_num = '$requiredCheckpointNum', ";
 		if($limitTicketNum != null)			$sql.= "limit_ticket_num = '$limitTicketNum', ";
 		if($type != null)					$sql.= "type = '$type', ";
+		if($url != null)					$sql.= "url = '$url', ";
 		$sql.= "modified = now() WHERE ticket_id = '$this->_ticketID'";
 		$dbh->query($sql);
 	}
