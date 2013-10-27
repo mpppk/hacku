@@ -11,7 +11,24 @@
 	define("EDIT_URL", "editStamprally.php");
 
 	$usr = new User($_SESSION['me']->id);
+	
+	// チェックポイントやチケットが存在しないスタンプラリーのゴミデータを削除する
+	// こういうゴミデータはスタンプラリーだけ登録してチェックポイントやチケットを登録しなかったときにできる
+	$stamprallyIDs = $usr->getAllManagedStamprallyID();
+	//var_dump($stamprallyIDs);
+	foreach($stamprallyIDs as $stamprallyID) {
+		$s = new Stamprally($stamprallyID);
+		$countC = count( $s->getAllCheckpointID() );
+		$countT = count( $s->getAllTicketID() );
+		//var_dump($countC);
+		//var_dump($countT);
+		if( $countC == 0 || $countT == 0 ) {
+			$s->remove();
+		}
+	}
+	
 	$allManagedStamprallyID = $usr->getAllManagedStamprallyID();
+	
 	
 	// ----------HTMLで利用する変数----------
 	$allStamprallyInfo = array();// ユーザーが参加しているスタンプラリーの名前が格納された配列
@@ -31,6 +48,7 @@
 
 		array_push($allStamprallyInfo, $tempStamprallyInfo);
 	}
+	
 ?>
 
 <!DOCTYPE html>

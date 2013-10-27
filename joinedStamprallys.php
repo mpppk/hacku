@@ -43,7 +43,7 @@
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
-			<h1><img src="imgs/sankatyu01.gif"></h1>
+			<img src="imgs/sankatyu01.gif">
 			<ul>
 				<?php foreach ($allStamprallyInfo as $stamprallyInfo) : ?>
 					<li>

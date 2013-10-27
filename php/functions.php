@@ -294,6 +294,18 @@ class StampRally {
 		$dbh->query($sql);
 		return $dbh->lastInsertId();
 	}
+	
+	// すべてのスタンプラリーのID配列を返す関数
+	public static function all() {
+		$dbh = connectDB();
+		$sql = "SELECT * FROM `stamprallies`";
+		
+		$res = array();
+		foreach ($dbh->query($sql) as $row) {
+			array_push($res, (int)$row['stamprally_id']);
+		}
+		return $res;
+	}
 }
 
 //==========================================================================================================
@@ -342,6 +354,18 @@ class Ticket {
 		$sql.= "VALUES ('$stamprallyID', '$ticketName', '$limitDate', '$requiredCheckpointNum', '$limitTicketNum', now(), now())";
 		$dbh->query($sql);
 		return $dbh->lastInsertId();
+	}
+	
+	// すべてのチケットのID配列を返す関数
+	public static function all() {
+		$dbh = connectDB();
+		$sql = "SELECT * FROM `tickets`";
+		
+		$res = array();
+		foreach ($dbh->query($sql) as $row) {
+			array_push($res, (int)$row['ticket_id']);
+		}
+		return $res;
 	}
 }
 
@@ -396,6 +420,18 @@ class Checkpoint {
 		$sql.= "VALUES ('$checkpointName', '$publicDescription', '$privateDescription', '$stamprallyID', '$url', now(), now())";
 		$dbh->query($sql);
 		return $dbh->lastInsertId();
+	}
+	
+	// すべてのチェックポイントのID配列を返す関数
+	public static function all() {
+		$dbh = connectDB();
+		$sql = "SELECT * FROM `checkpoints`";
+		
+		$res = array();
+		foreach ($dbh->query($sql) as $row) {
+			array_push($res, (int)$row['checkpoint_id']);
+		}
+		return $res;
 	}
 }
 

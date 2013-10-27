@@ -28,10 +28,9 @@
 
 	/***** ユーザーの現在の位置情報を取得 *****/
 	function successCallback(position) {
-		alert("successCallback");
 		var currentPostionLat = position.coords.latitude;
 		var currentPostionLon = position.coords.longitude;
-		var threshold = 10;
+		var threshold = 0.01;
 		$.post('php/_check_inside.php', {
 		    stamprallyID: <?php echo h($_GET['id']); ?>,
 		    lat: currentPostionLat,
@@ -39,14 +38,17 @@
 		    threshold: threshold
 		}, function(rs) {
 			if(rs == "1" || rs == "-1"){// 成功時orスタンプラリーの緯度経度が登録されていない時
+				alert("response of check inside: " + rs);
 				<?php 
-				$_SESSION["currentCheckpoint"] = $_GET['id']; ?>
+				$_SESSION["currentCheckpoint"] = $_GET['id'];
+				$_SESSION[""] ?>
 				// location.href = 'checkCheckpoint.php';
 				location.href = 'checkCheckpoint.php';
 			}
 			if(rs == "0"){// 失敗時
 				// location.href = 'checkCheckpoint.php';
-				alert("GPSをONにしてください!: " + rs);
+				alert("チェックポイントと現在地が遠すぎます！" + rs);
+				location.href = 'index.php';
 			}
 		});
 	}

@@ -28,7 +28,8 @@
 	$userInfo['id'] = $_SESSION['me']->id;
 	$currentCheckpoint = new Checkpoint($checkpointID);
 	$currentCheckpointInfo = array();
-	
+	$currentCheckpointInfo['id'] = $checkpointID;
+
 	// stamprallyインスタンスを生成
 	$currentCheckpointInfo['stamprallyID'] = $currentCheckpoint->getColumnValue('stamprally_id');
 	$stamprally = new StampRally($currentCheckpointInfo['stamprallyID']);
@@ -105,6 +106,10 @@
 			$currentGotTicketsInfo[] = $tempCurrentGotTicketInfo;
 		}
 	}
+
+	// twitterボタンのツイート内容
+	$twMsg = "「". $stamprallyInfo['name']. "」の「". $currentCheckpointInfo['name']. "」にチェックしました!";
+	$twURL = SITE_URL. CHECKPOINT_URL. "?id=". $currentCheckpointInfo['id'];
 
 	// ---------- (デバッグ用) 保持しているデータ ----------
 	// echo "ユーザーのデータ一覧<br>";
@@ -192,6 +197,10 @@
 					<p><?php echo '種類'. $currentGotTicketInfo['type']; ?></p>
 				<?php endforeach; ?>
 			<?php endif; ?>
+			
+			<!-- ツイートボタン	 -->
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo h($twURL); ?>" data-text="<?php echo h($twMsg); ?>" data-lang="ja" data-size="large" data-count="none" data-hashtags="EasyRally">ツイート</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		</div><!-- main -->
 	</div><!-- contents -->
 </div><!-- page -->

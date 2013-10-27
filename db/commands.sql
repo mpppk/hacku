@@ -45,6 +45,7 @@ create table tickets (
     required_checkpoint_num int         not null,
     limit_ticket_num    int             not null,
     type                enum('food', 'shopping', 'gift'),
+    url                 varchar(256),
     created             datetime,
     modified            datetime,
     

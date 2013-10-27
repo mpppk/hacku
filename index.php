@@ -2,7 +2,7 @@
     require_once(dirname(__FILE__) . "/php/sessionInit.php");
     require_once(dirname(__FILE__). "/php/config.php");
     require_once(dirname(__FILE__). "/php/getLoginInfo.php");
-    echo "session_id: ". session_id(). "<br>";
+    // echo "session_id: ". session_id(). "<br>";
     $_SESSION['targetURL'] = "http://www6063ue.sakura.ne.jp/hacku/index.php";
     // echo session_id(). "<br>";
     // if(!isset($_SESSION['me'])){
@@ -41,7 +41,7 @@
 		<p>スタンプラリー/オリエンテーリング支援サービスです</p>
             <div id="main1_s">
             <h1>easyrallyとは</h1>
-            <p>rally rally rally rally rally rally rally rally </p>
+            <p>ユビキタス次世代ノマドを支えるオリエンテーリング・プロダクト"Easyrally"はWeb2.0をイノベーションするソーシャルエンジニアリングでアジャイルをアジェンダしたダイバーシティをコモディティ化したモダン・ベストエフォートです！ </p>
             </div>
             <div id="main2_s">
             <h1>easyrallyとは</h1>

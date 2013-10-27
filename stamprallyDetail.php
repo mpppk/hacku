@@ -13,9 +13,6 @@
 	// ユーザー情報を取得
 	$user = new User($_SESSION['me']->id);
 	$userInfo = array();
-	$userInfo['allManagedStamprallyID'] = $user->getAllManagedStamprallyID();	
-	// $userInfo['']
-
 
 	// スタンプラリー情報を取得
 	$stamprally = new StampRally($_GET["id"]);
@@ -32,15 +29,17 @@
 	$stamprallyInfo['allCheckpointsID'] = $stamprally->getAllCheckpointID();
 	$stamprallyInfo['allCheckpointsNum'] = count($stamprally->getAllCheckpointID());
 
-	// 自分が管理しているスタンプラリーだった場合はtrue
-	$stamprallyInfo['isManage'] = false;
-	foreach ($userInfo as $managedCheckpointID) {
-
-	}
-
-
 	// 現在のユーザーがこのスタンプラリーでチェックした数を取得
 	$userInfo['allCheckedCheckpointsNum'] = count($user->getAllCheckedCheckpointID($stamprallyInfo['id']));
+
+	$userInfo['allManagedStamprallyID'] = $user->getAllManagedStamprallyID();
+	$userInfo['isManage'] = false;
+	// 管理しているスタンプラリーの場合はtrue
+	foreach ($userInfo['allManagedStamprallyID'] as $managedStamprallyID) {
+		if($managedStamprallyID == $stamprallyInfo['id']){
+			$userInfo['isManage'] = true;
+		}
+	}
 
 	// チケット情報を取得
 	$allTicketID = $stamprally->getAllTicketID();
@@ -62,7 +61,7 @@
 			$reminingRequiredTicketsNum = $tempTicketInfo['requiredCheckpointNum'] - $userInfo['allCheckedCheckpointsNum'];
 			$tempTicketInfo['gotMsg'] = "あと". $reminingRequiredTicketsNum. "チェックで獲得!";
 		}
-
+		$tempTicketInfo['url'] = $ticket->getColumnValue("url");
 		// チケットの画像をtypeに応じて決める
 		switch ($tempTicketInfo['type']) {
 			case 'food':
@@ -97,6 +96,12 @@
 		$tempCheckpointInfo['url'] = $tempCheckpoint->getColumnValue("url");
 		array_push($allCheckpointInfo, $tempCheckpointInfo);
 
+	}
+	
+	// 地図を表示するか
+	$dispMap = TRUE;
+	if( $stamprallyInfo['lat'] == NULL || $stamprallyInfo['lon'] == NULL ) {
+		$dispMap = FALSE;
 	}
 
 	// rog
@@ -141,12 +146,18 @@
 				<dl id="acMenu_title"><!-- アコーディオン使う場所 -->
 					<dt><h1><?php echo h($stamprallyInfo['name']. "  ". $userInfo['allCheckedCheckpointsNum']. "/". $stamprallyInfo['allCheckpointsNum']);?> ▼</h1></dt><!-- アコーディオンタイトル -->
 					<dd><!-- アコーディオン内容 -->
-						<p>主催者: <?php echo h($stamprallyInfo['masterName']); ?></p>
-						<p>場所: <?php echo h($stamprallyInfo['place']); ?></p>
-						<p>説明: <?php echo h($stamprallyInfo['description']); ?></p>
-						<p>開始日時: <?php echo h($stamprallyInfo['startDate']); ?></p>
-						<p>終了日時: <?php echo h($stamprallyInfo['endDate']); ?></p>
+                    <div id="main4_s">
+                    <table class="table">
+						<tr><th>主催者: </th><th><?php echo h($stamprallyInfo['masterName']); ?></th></tr>
+						<tr><th>場所: </th><th><?php echo h($stamprallyInfo['place']); ?></th></tr>
+						<tr><th>説明: </th><th><?php echo h($stamprallyInfo['description']); ?></th></tr>
+						<tr><th>開始日時: </th><th><?php echo h($stamprallyInfo['startDate']); ?></th></tr>
+						<tr><th>終了日時: </th><th><?php echo h($stamprallyInfo['endDate']); ?></th></tr>
+                        </table>
+                        <?php if($dispMap): ?>
 						<div id="map" style="width:400px; height:250px;"></div>
+						<?php endif; ?>
+                    </div>
 					</dd>
 				</dl>
 			</div>
@@ -159,11 +170,14 @@
 							<div id=<?php echo h("main". $divNum. "_s"); ?> >
 								<div id="main4_s">
 									<h2><a href=<?php echo h(ticketURL. "?id=". $ticketInfo['id']);?>><?php echo h($ticketInfo['name']);?></a><?php echo h(" ". $ticketInfo['gotMsg']) ?></h2>
-									<img src="<?php echo h($ticketInfo['imgURL']); ?>">
-									<p>説明: <?php echo h($ticketInfo['description']);?></p>
-									<p>有効期限: <?php echo h($ticketInfo['limitDate']);?></p>
-									<p>必要チェック数: <?php echo h($ticketInfo['requiredCheckpointNum']);?></p>
-									<p>配布上限: <?php echo h($ticketInfo['limitTicketNum']);?></p>
+                                     <table class="table">
+									<tr><td rowspan="5"><img class="icon" src="<?php echo h($ticketInfo['imgURL']); ?>"></td></tr>
+									<tr><td>説明: </td><td><?php echo h($ticketInfo['description']);?></td></tr>
+									<tr><td>有効期限: </td><td><?php echo h($ticketInfo['limitDate']);?></td></tr>
+									<tr><td>必要チェック数: </td><td><?php echo h($ticketInfo['requiredCheckpointNum']);?></td></tr>
+									<tr><td>配布上限: </td><td><?php echo h($ticketInfo['limitTicketNum']);?></td></tr>
+                                    <!-- <p>利用時URL: <input type="text" value="<?php echo h($ticketInfo['url']); ?>"></p> -->
+                                    </table>
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -179,6 +193,7 @@
 								<div id=<?php echo h("main". $divNum. "_s"); ?> >
 									<h2><a href=<?php echo h(checkpointURL. "?id=". $checkpointInfo['id']);?>><?php echo h($checkpointInfo['name']);?></a></h2>
 									<p>説明: <?php echo h($checkpointInfo['publicDescription']);?></p>
+									<!-- <p>URL: <input type="text" value="<?php echo h($checkpointInfo['url']); ?>"></p> -->
 								</div>
 							</div>
 						<?php endforeach; ?>

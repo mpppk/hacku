@@ -58,17 +58,9 @@ a:active {
 color: #444444;
 }
 
-h3 {
-	margin: 0px 0px 0.5em 3px;
-	font-size: 100%;
-	color: #C30D23;
-}
-
 th{
 	padding: 2%;
 }
-
-
 
 
 /* ========================================  #page ページ外枠 */
@@ -94,6 +86,7 @@ th{
 #title {
 	color: #666666;
 	margin: 8px;
+	border: none;
 }
 
 #login {
@@ -152,7 +145,7 @@ th{
 
 #main4_s{
 	padding: 3%;
-	background-color: #F7B52C;
+	background: url(../imgs/back01.gif);
 	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
 	margin:2%;
 }
@@ -180,35 +173,114 @@ th{
 
 #main4_k{
 	padding: 3%;
-	background-color: #F7B52C;
+	background: url(../imgs/back01.gif);
 	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
 	margin:2%;
 }
 
-
+/* ========================================  #main h要素*/
 
 #main h1 {
 	padding: 1%;
-	margin: 1%;
+	margin: 3%;
+	background: #FFF;
+	color: #8DC21F;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	text-shadow:0px 0px 3px #999;
+	box-shadow:inset -1px -1px 2px rgba(0,0,0, 0.6),inset 1px 1px 2px rgba(255,255,255,0.8);
+	box-shadow: 1px 1px 2px rgba(0,0,0, 0.6), 1px 1px 2px rgba(255,255,255,0.8);
 	background-color: #FFF;
 	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
-	color: #0B7A8E;
+	border:2px solid #8DC21F;
 }
 
 
 #main h2 {
+	color: #B0BE23;
 	clear: both;
 	padding: 1%;
 	margin: 1%;
-	border-left: 1% solid #F7B52C;
-	font-size: 120%;
+	text-shadow:1px 1px 3px #fff;
 	border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;
 	background-color: #fff;
 }
 
+#main h3 {
+	color: #F7B52C;
+}
 
+#main ul{
+	margin:0 auto;
+	background-color:#FFF;
+	width:80%;	
+}
 
+#main li{
+	margin: 0 0 1em 0;
+	list-style:outside none;
+	text-align:center;
+	background: #FFF url(../imgs/list_02.gif) no-repeat;
+	box-shadow:inset -1px -1px 2px rgba(0,0,0, 0.6),inset 1px 1px 2px rgba(255,255,255,0.8);
+}
 
+#main a{
+	margin-left:auto;
+	display: block;
+	text-decoration:none;
+	font-style:italic;
+	color:  #357709;
+	border-bottom: dashed #A0C523 1px;
+}
+
+/* ========================================  #main_s h要素*/
+
+#main1_s h1 {
+	background-color: #8DC21F;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+#main2_s h1 {
+	background-color: #B0BE23;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+#main3_s h1 {
+	background-color: #D4B928;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+/* ========================================  #main_k h要素*/
+
+#main1_k h1 {
+	background-color: #C30D23;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+#main2_k h1 {
+	background-color: #D44526;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+#main3_k h1 {
+	background-color: #E67D29;
+	border:solid #FFF 3px;
+	color:#FFF;
+	text-shadow:1px 1px 3px #333;
+}
+
+/* ========================================  #その他要素*/
 
 #map{
 	width:80%;
@@ -232,7 +304,7 @@ input{
 }
 
 input:focus {
-    border:solid 1px #8DC21F;
+    border:solid 2px #8DC21F;
 }
 
 input[type=submit]{
@@ -337,7 +409,6 @@ input[type=button] {
 	margin-left:auto;
 	display: block;
 	text-decoration:none;
-	font-size: 75%;
 	font-style:italic;
 	color:  #357709;
 	border-bottom: dashed #A0C523 1px;
@@ -373,7 +444,6 @@ input[type=button] {
 #manageMenu a{
 	display: block;
 	text-decoration: none;
-	font-size: 75%;
 	font-style:italic;
 	color: #800000;
 	border-bottom: dashed #C30D23 1px;
@@ -402,12 +472,18 @@ input[type=button] {
 }
 
 /* ========================================  そ�Eほか個別設宁E*/
+.icon{
+	margin:3%;
+	border:2px #FFFFFF dashed ;
+	background-color:#FFF;
+}
 
 
 .table{
 	margin: 0 auto;
 	width: 80%;
 }
+
 
 .img{
 	margin: 5% auto;

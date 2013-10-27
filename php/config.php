@@ -9,6 +9,7 @@
 	define("SITE_URL", "http://www6063ue.sakura.ne.jp/hacku/");
 	define("LOGIN_URL", "php/login.php");
 	define("STAMPRALLY_URL", "stamprallyDetail.php");
+	define("CHECKPOINT_URL", "checkpointDetail.php");
 
 
 	define("APP_ID", "dj0zaiZpPVphNFdrbTRqOHMzWSZzPWNvbnN1bWVyc2VjcmV0Jng9NmU-");

@@ -48,7 +48,7 @@
 		<p>チェックポイント名：<?php echo $p[$name]; ?></p>
 		<p>概要説明：<?php echo $p[$pubDesc]; ?></p>
 		<p>詳細説明：<?php echo $p[$priDesc]; ?></p>
-		<p>--------------------------------------------------------------------------------</p>
+		<hr>
 		<?php endforeach; ?>
 		
 		
@@ -108,7 +108,7 @@ $(document).on('click', '#addTicket', function() {
 });
 
 $(document).on('click', '.removeTicket', function() {
-	var id = $(this).parent().parent().attr('data-id');
+	var id =  $(this).parent().parent().parent().parent().parent().attr('data-id');
 	var last_id = $('.ticket').last().attr('data-id');
 	//alert(id+' '+last_id);
 	//alert($('#tickets').html());

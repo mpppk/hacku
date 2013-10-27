@@ -56,7 +56,7 @@
         	<div id="main">
 			<h1>新しいスタンプラリーを登録しました!</h1>
 	 		<p>スタンプラリー名：<?php echo $_POST["stamprallyName"]; ?></p>
-			<p>場所：<?php echo $_POST["place"]; ?></p>
+			<p>住所：<?php echo $_POST["place"]; ?></p>
 			<p>説明:<?php echo $_POST["description"]; ?></p>
 			<p>開始日時:<?php echo $startDate; ?></p>
 			<p>終了日時:<?php echo $endDate; ?></p>

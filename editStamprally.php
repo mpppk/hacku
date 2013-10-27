@@ -12,6 +12,20 @@
 	$stamprallyInfo['description'] = $stamprally->getColumnValue("description");
 	$stamprallyInfo['startDate'] = $stamprally->getColumnValue("start_date");
 	$stamprallyInfo['endDate'] = $stamprally->getColumnValue("end_date");
+	//var_dump($stamprallyInfo['startDate']);
+	
+	$datetime = $stamprallyInfo['startDate'];
+	$d = explode(" ", $datetime);
+	$sDate = $d[0];
+	$t = explode(":", $d[1]);
+	$sTime = $t[0] .':'. $t[1];
+	
+	
+	$datetime = $stamprallyInfo['endDate'];
+	$d = explode(" ", $datetime);
+	$eDate = $d[0];
+	$t = explode(":", $d[1]);
+	$eTime = $t[0] .':'. $t[1];
 	
 	$checkpointIDs = $stamprally->getAllCheckpointID();
 	$ticketIDs = $stamprally->getAllTicketID();
@@ -34,12 +48,15 @@
 		<div id="main">
 			<form action="editStamprallyProcess.php" method="post">
 			<h1>スタンプラリー</h1>
+			<p>スタンプラリー名: <input type="text" name="stamprallyName" value=<?php echo h($stamprallyInfo['name']); ?>></p>
 			<p>主催者: <input type="text" name="masterName" value=<?php echo h($stamprallyInfo['masterName']); ?>></p>
-			<p>場所: <input type="text" name="place" value=<?php echo h($stamprallyInfo['place']); ?>></p>
+			<p>住所: <input type="text" name="place" value=<?php echo h($stamprallyInfo['place']); ?>></p>
 			<p>説明: <textarea name="description" ><?php echo h($stamprallyInfo['description']); ?></textarea>
-			<p>開始日時: <input type="text" name="startDate" value=<?php echo h($stamprallyInfo['startDate']); ?>></p>
-			<p>終了日時: <input type="text" name="endDate" value=<?php echo h($stamprallyInfo['endDate']); ?>></p>
-			
+			<p>開始日: <input type="date" name="startDate" value=<?php echo h($sDate); ?>></p>
+			<p>開始時刻: <input type="time" name="startTime" value=<?php echo h($sTime); ?>></p>
+			<p>終了日: <input type="date" name="endDate" value=<?php echo h($eDate); ?>></p>
+			<p>終了時刻: <input type="time" name="endTime" value=<?php echo h($eTime); ?>></p>
+			<hr>
 			
 			<h1>チェックポイント</h1>
 			<div id="points">
@@ -51,7 +68,7 @@
 					<p>概要説明: <input type="text" name="publicDescription<?php echo $n; ?>" value="<?php echo $cp->getColumnValue('public_description'); ?>"></p>
 					<p>詳細説明: <input type="text" name="privateDescription<?php echo $n; ?>" value="<?php echo $cp->getColumnValue('private_description'); ?>"></p>
 					<p><input type="button" class="removePoint" value="削除"></p>
-					<p>--------------------------------------------------------------------------------</p>
+					<hr>
 				</div>
 				<?php $n++; endforeach; ?>
 			</div>
@@ -95,7 +112,7 @@
 					<p>交換期限（時刻）: <input type="time" name="limitTime<?php echo $n; ?>" value="<?php echo $time; ?>"></p>
 					<p>チケット獲得に必要なチェックポイント数: <input type="number" name="requiredCheckpointNum<?php echo $n; ?>" value="<?php echo $tk->getColumnValue('required_checkpoint_num'); ?>"></p>
 					<p><input type="button" class="removeTicket" value="削除"></p>
-					<p>--------------------------------------------------------------------------------</p>
+					<hr>
 				</div>
 				<?php $n++; endforeach; ?>
 			</div>
@@ -119,7 +136,7 @@ $(document).on('click', '#addPoint', function() {
 			+'<p>概要説明: <input type="text" name="publicDescription'+id+'" value="tempDescription"></p>'
 			+'<p>詳細説明: <input type="text" name="privateDescription'+id+'" value="tempDescription"></p>'
 			+'<p><input type="button" class="removePoint" value="削除"></p>'
-			+'<p>--------------------------------------------------------------------------------</p>'
+			+'<hr>'
 			+'</div>';
 	$('#points').append(html);
 });
@@ -159,7 +176,7 @@ $(document).on('click', '#addTicket', function() {
 		+'<p>交換期限（時刻）: <input type="time" name="limitTime'+id+'" value="20:40"></p>'
 		+'<p>チケット獲得に必要なチェックポイント数: <input type="number" name="requiredCheckpointNum'+id+'" value="1"></p>'
 		+'<p><input type="button" class="removeTicket" value="削除"></p>'
-		+'<p>--------------------------------------------------------------------------------</p>'
+		+'<hr>'
 		+'</div>';
 	$('#tickets').append(html);
 });

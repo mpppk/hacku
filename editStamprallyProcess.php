@@ -7,12 +7,27 @@
 	
 	//var_dump($_POST);
 	
+	$post['stamprallyName']	= $_POST['stamprallyName'];
 	$post['masterName']		= $_POST['masterName'];
 	$post['place']			= $_POST['place'];
 	$post['description']	= $_POST['description'];
-	$post['startDate']		= $_POST['startDate'];
-	$post['endDate']		= $_POST['endDate'];
+	$post['startDate']		= $_POST['startDate'] .' '. $_POST['startTime']. ':00';
+	$post['endDate']		= $_POST['endDate'] .' '. $_POST['endTime']. ':00';
 	$stamprallyID			= $_POST['stamprallyID'];
+	
+	// 住所から緯度経度を取得
+	$coordinates = getCoordinates($_POST["place"]);
+	
+	$stamprally = new Stamprally($stamprallyID);
+	$stamprally->update($post['stamprallyName'],
+		null,
+		$post['masterName'],
+		$post['place'],
+		$coordinates['lat'],
+		$coordinates['lon'],
+		$post['description'],
+		$post['startDate'],
+		$post['endDate']);
 	
 	$pPos = array();
 	$pIDs = array();
@@ -136,7 +151,7 @@
 	}
 	
 	//DBからとってきたほうにあって、p/tIDsにないものを削除
-	$stamprally = new Stamprally($stamprallyID);
+	//$stamprally = new Stamprally($stamprallyID);
 	$pDBs = $stamprally->getAllCheckpointID();
 	$tDBs = $stamprally->getAllTicketID();
 	foreach($pDBs as $pID) {
@@ -180,11 +195,13 @@
 		
 		
 		<h1>スタンプラリー</h1>
+		<p>スタンプラリー名：<?php echo $post['stamprallyName']; ?></p>
 		<p>主催者名：<?php echo $post['masterName']; ?></p>
-		<p>場所：<?php echo $post['place']; ?></p>
+		<p>住所：<?php echo $post['place']; ?></p>
 		<p>説明:<?php echo $post['description']; ?></p>
 		<p>開始日時:<?php echo $post['startDate']; ?></p>
 		<p>終了日時:<?php echo $post['endDate']; ?></p>
+        <hr>
 		
 		
 		<h1>チェックポイント</h1>
@@ -193,7 +210,7 @@
 		<p>概要説明：<?php echo $p['publicDescription']; ?></p>
 		<p>詳細説明：<?php echo $p['privateDescription']; ?></p>
 		<p>URL:<input type="text" value="<?php echo $p['pointURL']; ?>"></p>
-		<p>--------------------------------------------------------------------------------</p>
+		<hr>
 		<?php endforeach; ?>
 		
 		
@@ -206,7 +223,7 @@
 		<p>交換期限：<?php echo $p['limitDate']; ?></p>
 		<p>チケット獲得に必要なチェックポイント数：<?php echo $p['requiredCheckpointNum']; ?></p>
 		<p>交換先URL:<input type="text" value="<?php echo $p['ticketURL']; ?>"></p>
-		<p>--------------------------------------------------------------------------------</p>
+		<hr>
 		<?php endforeach; ?>
 		
 	</div>

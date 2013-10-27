@@ -12,6 +12,10 @@
 	$ticketInfo['requiredCheckpointNum'] = 
 		$ticket->getColumnValue("required_checkpoint_num");
 	$ticketInfo['limitTicketNum'] = $ticket->getColumnValue("limit_ticket_num");
+	$ticketInfo['stamprallyID'] = $ticket->getColumnValue("stamprally_id");
+
+	$stamprally = new StampRally($ticketInfo['stamprallyID']);
+	$stamprallyName = $stamprally->getColumnValue("stamprally_name");
 ?>
 
 <!DOCTYPE html>
@@ -28,11 +32,13 @@
 		<?php include (MENU_NAME); ?>
 		<div id="main">
 			<h1><?php echo h($ticketInfo['name']);?></h1>
-			<p>取得可能なスタンプラリー:<?php echo h($ticketInfo['description']);?></p>
-			<p>説明:<?php echo h($ticketInfo['description']);?></p>
-			<p>有効期限:<?php echo h($ticketInfo['limitDate']);?></p>
-			<p>必要チェックポイント数:<?php echo h($ticketInfo['requiredCheckpointNum']);?></p>
-			<p>残り配布枚数:<?php echo h($ticketInfo['limitTicketNum']);?></p>
+            <table class="table">
+			<tr><th>取得可能なスタンプラリー:</th><th><?php echo h($stamprallyName);?></th></tr>
+			<tr><th>説明:</th><th><?php echo h($ticketInfo['description']);?></th></tr>
+			<tr><th>有効期限:</th><th><?php echo h($ticketInfo['limitDate']);?></th></tr>
+			<tr><th>必要チェックポイント数:</th><th><?php echo h($ticketInfo['requiredCheckpointNum']);?></th></tr>
+			<tr><th>残り配布枚数:</th><th><?php echo h($ticketInfo['limitTicketNum']);?></th></tr>
+            </table>
 		</div>
 	</div>
 </div>

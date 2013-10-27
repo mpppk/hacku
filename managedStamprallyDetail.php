@@ -32,6 +32,15 @@
 	// 現在のユーザーがこのスタンプラリーでチェックした数を取得
 	$userInfo['allCheckedCheckpointsNum'] = count($user->getAllCheckedCheckpointID($stamprallyInfo['id']));
 
+	$userInfo['allManagedStamprallyID'] = $user->getAllManagedStamprallyID();
+	$userInfo['isManage'] = false;
+	// 管理しているスタンプラリーの場合はtrue
+	foreach ($userInfo['allManagedStamprallyID'] as $managedStamprallyID) {
+		if($managedStamprallyID == $stamprallyInfo['id']){
+			$userInfo['isManage'] = true;
+		}
+	}
+
 	// チケット情報を取得
 	$allTicketID = $stamprally->getAllTicketID();
 	$allTicketInfo = array();
@@ -52,7 +61,7 @@
 			$reminingRequiredTicketsNum = $tempTicketInfo['requiredCheckpointNum'] - $userInfo['allCheckedCheckpointsNum'];
 			$tempTicketInfo['gotMsg'] = "あと". $reminingRequiredTicketsNum. "チェックで獲得!";
 		}
-
+		$tempTicketInfo['url'] = $ticket->getColumnValue("url");
 		// チケットの画像をtypeに応じて決める
 		switch ($tempTicketInfo['type']) {
 			case 'food':
@@ -88,6 +97,13 @@
 		array_push($allCheckpointInfo, $tempCheckpointInfo);
 
 	}
+	
+	// 地図を表示するか
+	$dispMap = TRUE;
+	if( $stamprallyInfo['lat'] == NULL || $stamprallyInfo['lon'] == NULL ) {
+		$dispMap = FALSE;
+	}
+
 
 	// rog
 	// echo "allCheckpointInfo:<br>";
@@ -100,7 +116,7 @@
 <head>
     <meta charset="UTF-8">
     <title>スタンプラリー詳細 - EasyRally</title>
-    <link rel="stylesheet" href="css/hacku.css">
+    <link rel="stylesheet" href="css/hacku2.css">
     <script charset="UTF-8" src="http://js.api.olp.yahooapis.jp/OpenLocalPlatform/V1/jsapi?appid=dj0zaiZpPVphNFdrbTRqOHMzWSZzPWNvbnN1bWVyc2VjcmV0Jng9NmU-"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
@@ -123,52 +139,59 @@
 </head>
 <body>
 <div id="page">
-	<?php include (HEADER_NAME); ?>
+	<?php include (HEADER2_NAME); ?>
 	<div id="contents">
 		<?php include (MENU_NAME); ?>
 		<div id="main">
-			<div id="main1_s">
+			<div id="main1_k">
 				<dl id="acMenu_title"><!-- アコーディオン使う場所 -->
 					<dt><h1><?php echo h($stamprallyInfo['name']. "  ". $userInfo['allCheckedCheckpointsNum']. "/". $stamprallyInfo['allCheckpointsNum']);?> ▼</h1></dt><!-- アコーディオンタイトル -->
 					<dd><!-- アコーディオン内容 -->
-						<p>主催者: <?php echo h($stamprallyInfo['masterName']); ?></p>
-						<p>場所: <?php echo h($stamprallyInfo['place']); ?></p>
-						<p>説明: <?php echo h($stamprallyInfo['description']); ?></p>
-						<p>開始日時: <?php echo h($stamprallyInfo['startDate']); ?></p>
-						<p>終了日時: <?php echo h($stamprallyInfo['endDate']); ?></p>
-						<div id="map" style="width:400px; height:250px;"></div>
+						<div id="main4_k">
+							<p>主催者: <?php echo h($stamprallyInfo['masterName']); ?></p>
+							<p>場所: <?php echo h($stamprallyInfo['place']); ?></p>
+							<p>説明: <?php echo h($stamprallyInfo['description']); ?></p>
+							<p>開始日時: <?php echo h($stamprallyInfo['startDate']); ?></p>
+							<p>終了日時: <?php echo h($stamprallyInfo['endDate']); ?></p>
+							<?php if($dispMap): ?>
+							<div id="map" style="width:400px; height:250px;"></div>
+							<?php endif; ?>
+						</div>
 					</dd>
 				</dl>
 			</div>
 
-			<div id="main2_s">
+			<div id="main2_k">
 				<dl id="acMenu_ticket"><!-- アコーディオン使う場所 -->
 					<dt><h1>取得できるチケット一覧 ▼</h1></dt><!-- アコーディオンタイトル -->
 					<dd><!-- アコーディオン内容 -->
 						<?php  foreach($allTicketInfo as $ticketInfo) :?>
 							<div id=<?php echo h("main". $divNum. "_s"); ?> >
-								<div id="main4_s">
+								<div id="main4_k">
 									<h2><a href=<?php echo h(ticketURL. "?id=". $ticketInfo['id']);?>><?php echo h($ticketInfo['name']);?></a><?php echo h(" ". $ticketInfo['gotMsg']) ?></h2>
 									<img src="<?php echo h($ticketInfo['imgURL']); ?>">
 									<p>説明: <?php echo h($ticketInfo['description']);?></p>
 									<p>有効期限: <?php echo h($ticketInfo['limitDate']);?></p>
 									<p>必要チェック数: <?php echo h($ticketInfo['requiredCheckpointNum']);?></p>
 									<p>配布上限: <?php echo h($ticketInfo['limitTicketNum']);?></p>
+									<p>利用時URL: <input type="text" value="<?php echo h($ticketInfo['url']); ?>"></p>
+
 								</div>
 							</div>
 						<?php endforeach; ?>
 					</dd><!-- アコーディオン内容 -->
 				</dl><!-- アコーディオン使う場所 -->
 			</div>
-			<div id="main3_s">
+			<div id="main3_k">
 				<dl id="acMenu_checkpoint"><!-- アコーディオン使う場所 -->
 					<dt><h1>チェックポイント一覧 ▼</h1></dt><!-- アコーディオンタイトル -->
 					<dd><!-- アコーディオン内容 -->
 						<?php  foreach($allCheckpointInfo as $checkpointInfo) :?>
-							<div id="main4_s">
+							<div id="main4_k">
 								<div id=<?php echo h("main". $divNum. "_s"); ?> >
 									<h2><a href=<?php echo h(checkpointURL. "?id=". $checkpointInfo['id']);?>><?php echo h($checkpointInfo['name']);?></a></h2>
 									<p>説明: <?php echo h($checkpointInfo['publicDescription']);?></p>
+									<p>URL: <input type="text" value="<?php echo h($checkpointInfo['url']); ?>"></p>
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -200,6 +223,4 @@
 
 </script>
 </html>
-
-
 
